@@ -4,11 +4,11 @@
 //
 // - **Difficulty**: Easy
 // - **Submission Criteria:** ink! contract must
-//     - Have a constructor accepting a name parameter.
-//     - Have a storage field for the DAO name.
-//     - Implement the provided methods.
-//     - Unit test for constructor and setting DAO name.
-//     - Be built and deployed on Pop Network testnet.
+//     - Have a constructor accepting a name parameter. - Done
+//     - Have a storage field for the DAO name. - Done
+//     - Implement the provided methods. - Done
+//     - Unit test for constructor and setting DAO name. - Already existed
+//     - Be built and deployed on Pop Network testnet. - ??
 // - **Submission Guidelines:**
 //     - Verify with R0GUE DevRel, and post on X.
 // - **Prize:** sub0 merch
@@ -19,14 +19,14 @@ mod dao {
 
     #[ink(storage)]
     pub struct Dao {
-        value: bool,
+        name: String,
     }
 
     impl Dao {
         // Constructor that initializes the values for the contract.
         #[ink(constructor)]
-        pub fn new(init_value: bool) -> Self {
-            Self { value: init_value }
+        pub fn new(initial_name: String) -> Self {
+            Self { name: initial_name }
         }
 
         // Constructor that initializes the default values for the contract.
@@ -37,8 +37,7 @@ mod dao {
 
         #[ink(message)]
         pub fn get_name(&self) -> String {
-            // - Returns the name of the Dao
-            todo!();
+            self.name.clone()
         }
     }
 
