@@ -78,7 +78,7 @@ mod dao {
             // - Error: Throw error `DaoError::VoterAlreadyRegistered` if the voter is registered
             // - Success: Register a new `voter` to the Dao
 
-            if self.registered_members.contains(&voter_id) {
+            if self.registered_members.contains(voter_id) {
                 return Err(DaoError::VoterAlreadyRegistered);
             }
 
@@ -87,7 +87,7 @@ mod dao {
                 name: voter_name,
             };
 
-            self.registered_members.insert(&voter_id, &member);
+            self.registered_members.insert(voter_id, &member);
 
             Ok(())
         }
@@ -97,11 +97,11 @@ mod dao {
             // - Error: Throw error `DaoError::VoterNotRegistered` if the voter is not registered
             // - Success: Deregister a new `voter` from the Dao
 
-            if !self.registered_members.contains(&voter_id) {
+            if !self.registered_members.contains(voter_id) {
                 return Err(DaoError::VoterNotRegistered);
             }
 
-            self.registered_members.remove(&voter_id);
+            self.registered_members.remove(voter_id);
 
             Ok(())
         }
@@ -109,7 +109,7 @@ mod dao {
         #[ink(message)]
         pub fn has_voter(&self, voter_id: AccountId) -> bool {
             // - Success: Return if the voter is registered.
-            self.registered_members.contains(&voter_id)
+            self.registered_members.contains(voter_id)
         }
 
         #[ink(message)]
@@ -117,7 +117,7 @@ mod dao {
             // - Error: Throw error `DaoError::VoterNotRegistered` if the voter is not registered
             // - Success: Create a new proposal that stores `votes` from `voters`
 
-            if !self.registered_members.contains(&voter_id) {
+            if !self.registered_members.contains(voter_id) {
                 return Err(DaoError::VoterNotRegistered);
             }
 
@@ -141,7 +141,7 @@ mod dao {
             //              -- I am assuming that this comment is incorrect and in case of success
             //                  we need to remove the specified proposal
 
-            if !self.registered_members.contains(&voter_id) {
+            if !self.registered_members.contains(voter_id) {
                 return Err(DaoError::VoterNotRegistered);
             }
 
@@ -173,7 +173,7 @@ mod dao {
             // - Error: Throw error `Error::ProposalDoesNotExist` if the proposal is not created
             // - Success: Vote on the proposal
 
-            if !self.registered_members.contains(&voter_id) {
+            if !self.registered_members.contains(voter_id) {
                 return Err(DaoError::VoterNotRegistered);
             }
 
@@ -182,12 +182,12 @@ mod dao {
                 return Err(DaoError::ProposalDoesNotExist);
             }
 
-            let mut member = self.registered_members.get(&voter_id).unwrap();
-            member.vote_count += 1;
-            self.registered_members.insert(&voter_id, &member);
+            let mut member = self.registered_members.get(voter_id).unwrap();
+            member.vote_count = member.vote_count.saturating_add(1);
+            self.registered_members.insert(voter_id, &member);
 
             let proposal = proposals.get_mut(proposal_id as usize).unwrap();
-            proposal.vote_count += 1;
+            proposal.vote_count = proposal.vote_count.saturating_add(1);
 
             Ok(())
         }
@@ -196,7 +196,7 @@ mod dao {
         pub fn vote_count(&self, voter_id: AccountId) -> Result<u32, DaoError> {
             // - Returns the number of `votes` a Dao `voter` voted
 
-            if !self.registered_members.contains(&voter_id) {
+            if !self.registered_members.contains(voter_id) {
                 return Err(DaoError::VoterNotRegistered);
             }
 
