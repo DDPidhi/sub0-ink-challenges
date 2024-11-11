@@ -13,9 +13,15 @@
 
 #[ink::contract]
 mod dao {
-    use ink::{contract_ref, prelude::string::String, storage::StorageVec, xcm::prelude::*};
+    use ink::{
+        contract_ref,
+        prelude::string::String,
+        storage::StorageVec,
+        xcm::prelude::*,
+        prelude::vec::Vec,
+    };
     use minidao_common::*;
-    use superdao_traits::{Call, ChainCall, SuperDao, Vote};
+    use superdao_traits::{Call, ChainCall, Error, SuperDao, Vote};
 
     #[ink(storage)]
     pub struct Dao {
@@ -34,45 +40,106 @@ mod dao {
                 superdao: superdao.into(),
                 voters: StorageVec::new(),
             };
+            assert!(instance.superdao.register_member().is_ok(), "Superdao registration failed!");
             instance
         }
 
         #[ink(message)]
         pub fn get_name(&self) -> String {
             // - Returns the name of the Dao
-            todo!()
+            self.name.clone()
         }
 
         #[ink(message)]
-        pub fn register_voter(&mut self) -> Result<(), DaoError> {
+        pub fn register_voter(&mut self, voter: AccountId) -> Result<(), DaoError> {
             // - Error: Throw error `DaoError::VoterAlreadyRegistered` if the voter is registered
             // - Success: Register a new `voter` to the Dao
+            if self.has_voter(voter) {
+                return Err(DaoError::VoterAlreadyRegistered);
+            }
+            self.voters.push(&voter);
             Ok(())
         }
 
         #[ink(message)]
-        pub fn deregister_voter(&mut self) -> Result<(), DaoError> {
+        pub fn deregister_voter(&mut self, voter: crate::dao::AccountId) -> Result<(), DaoError> {
             // - Error: Throw error `DaoError::VoterNotRegistered` if the voter is not registered
             // - Success: Deregister a new `voter` from the Dao
+            if !self.has_voter(voter) {
+                return Err(DaoError::VoterNotRegistered);
+            }
+            let mut new_voters = StorageVec::new();
+            while let Some(stored_voter) = self.voters.pop() {
+                if stored_voter != voter {
+                    new_voters.push(&stored_voter)
+                }
+            }
+            self.voters = new_voters;
             Ok(())
         }
 
         #[ink(message)]
         pub fn has_voter(&self, voter: AccountId) -> bool {
-            todo!()
+            let mut result = false;
+            for i in 0..self.voters.len() {
+                if let Some(v) = self.voters.get(i) {
+                    if v == voter {
+                        result = true;
+                        break;
+                    }
+                }
+            }
+            result
         }
 
         #[ink(message)]
-        pub fn create_superdao_cross_chain_proposal(&mut self) -> Result<(), DaoError> {
+        pub fn create_superdao_cross_chain_proposal(
+            &mut self,
+            voter: AccountId,
+            encoded_extrinsic: Vec<u8>,
+            fee_max: Balance,
+            ref_time: u64,
+            proof_size: u64,
+        ) -> Result<Result<u32, Error>, DaoError> {
             // - Error: Throw error `DaoError::VoterNotRegistered` if the voter is not registered
             // - Success: Create a SuperDao proposal to execute a cross-chain message.
-            Ok(())
+
+            if !self.has_voter(voter) {
+                return Err(DaoError::VoterNotRegistered);
+            }
+
+            let asset: Asset = (Location::parent(), fee_max).into();
+            let ah = Junctions::from([Parachain(1000)]);
+            let dest: Location = Location { parents: 1, interior: ah};
+
+            let message: Xcm<()> = Xcm::builder()
+                .withdraw_asset(asset.clone().into())
+                .buy_execution(asset.clone(), Unlimited)
+                .transact(
+                    OriginKind::SovereignAccount,
+                    Weight::from_parts(ref_time, proof_size),
+                    encoded_extrinsic.into(),
+                )
+                .build();
+
+            let call = Call::Chain(ChainCall::new(&dest, &message));
+
+            Ok(self.superdao.create_proposal(call))
         }
 
         #[ink(message)]
-        pub fn vote_proposal(&mut self, proposal_id: u32, vote: bool) -> Result<(), DaoError> {
+        pub fn vote_proposal(&mut self, proposal_id: u32, vote: bool, voter: AccountId) -> Result<(), DaoError> {
             // - Error: Throw error `DaoError::VoterNotRegistered` if the voter is not registered
             // - Success: Vote a SuperDao proposal.
+
+            if !self.has_voter(voter) {
+                return Err(DaoError::VoterNotRegistered);
+            }
+
+            let vote = if vote { Vote::Aye } else { Vote::Nay };
+
+            assert!(self.superdao.vote(proposal_id, vote).is_ok(), "Unable to vote proposal");
+
             Ok(())
         }
     }
