@@ -1,0 +1,1884 @@
+{
+  "source": {
+    "hash": "0xf358e66b6de385a14fe91b58a51ec859de6f78f7d664ce4a516c4b55b9ef3362",
+    "language": "ink! 5.0.0",
+    "compiler": "rustc 1.82.0",
+    "build_info": {
+      "rust_toolchain": "stable-aarch64-apple-darwin",
+      "cargo_contract_version": "5.0.0-alpha",
+      "build_mode": "Debug",
+      "wasm_opt_settings": {
+        "optimization_passes": "Z",
+        "keep_debug_symbols": false
+      }
+    }
+  },
+  "contract": {
+    "name": "superdao",
+    "version": "0.1.0",
+    "authors": [
+      "[your_name] <[your_email]>"
+    ]
+  },
+  "image": null,
+  "version": 5,
+  "types": [
+    {
+      "id": 0,
+      "type": {
+        "def": {
+          "sequence": {
+            "type": 1
+          }
+        }
+      }
+    },
+    {
+      "id": 1,
+      "type": {
+        "path": [
+          "ink_primitives",
+          "types",
+          "AccountId"
+        ],
+        "def": {
+          "composite": {
+            "fields": [
+              {
+                "type": 2,
+                "typeName": "[u8; 32]"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 2,
+      "type": {
+        "def": {
+          "array": {
+            "len": 32,
+            "type": 3
+          }
+        }
+      }
+    },
+    {
+      "id": 3,
+      "type": {
+        "def": {
+          "primitive": "u8"
+        }
+      }
+    },
+    {
+      "id": 4,
+      "type": {
+        "def": {
+          "sequence": {
+            "type": 3
+          }
+        }
+      }
+    },
+    {
+      "id": 5,
+      "type": {
+        "def": {
+          "primitive": "u128"
+        }
+      }
+    },
+    {
+      "id": 6,
+      "type": {
+        "def": {
+          "primitive": "u64"
+        }
+      }
+    },
+    {
+      "id": 7,
+      "type": {
+        "def": {
+          "primitive": "bool"
+        }
+      }
+    },
+    {
+      "id": 8,
+      "type": {
+        "def": {
+          "primitive": "u32"
+        }
+      }
+    },
+    {
+      "id": 9,
+      "type": {
+        "path": [
+          "ink_storage",
+          "lazy",
+          "mapping",
+          "Mapping"
+        ],
+        "params": [
+          {
+            "name": "K",
+            "type": 8
+          },
+          {
+            "name": "V",
+            "type": 10
+          },
+          {
+            "name": "KeyType",
+            "type": 15
+          }
+        ],
+        "def": {
+          "composite": {}
+        }
+      }
+    },
+    {
+      "id": 10,
+      "type": {
+        "path": [
+          "superdao_traits",
+          "Proposal"
+        ],
+        "def": {
+          "composite": {
+            "fields": [
+              {
+                "name": "call",
+                "type": 11,
+                "typeName": "Call"
+              },
+              {
+                "name": "voting_period_end",
+                "type": 8,
+                "typeName": "BlockNumber"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 11,
+      "type": {
+        "path": [
+          "superdao_traits",
+          "Call"
+        ],
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "name": "Contract",
+                "fields": [
+                  {
+                    "type": 12,
+                    "typeName": "ContractCall"
+                  }
+                ],
+                "index": 0
+              },
+              {
+                "name": "Chain",
+                "fields": [
+                  {
+                    "type": 14,
+                    "typeName": "ChainCall"
+                  }
+                ],
+                "index": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 12,
+      "type": {
+        "path": [
+          "superdao_traits",
+          "ContractCall"
+        ],
+        "def": {
+          "composite": {
+            "fields": [
+              {
+                "name": "callee",
+                "type": 1,
+                "typeName": "AccountId"
+              },
+              {
+                "name": "selector",
+                "type": 13,
+                "typeName": "[u8; 4]"
+              },
+              {
+                "name": "input",
+                "type": 4,
+                "typeName": "Vec<u8>"
+              },
+              {
+                "name": "transferred_value",
+                "type": 5,
+                "typeName": "Balance"
+              },
+              {
+                "name": "ref_time_limit",
+                "type": 6,
+                "typeName": "u64"
+              },
+              {
+                "name": "allow_reentry",
+                "type": 7,
+                "typeName": "bool"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 13,
+      "type": {
+        "def": {
+          "array": {
+            "len": 4,
+            "type": 3
+          }
+        }
+      }
+    },
+    {
+      "id": 14,
+      "type": {
+        "path": [
+          "superdao_traits",
+          "ChainCall"
+        ],
+        "def": {
+          "composite": {
+            "fields": [
+              {
+                "name": "dest",
+                "type": 4,
+                "typeName": "Vec<u8>"
+              },
+              {
+                "name": "msg",
+                "type": 4,
+                "typeName": "Vec<u8>"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 15,
+      "type": {
+        "path": [
+          "ink_storage_traits",
+          "impls",
+          "ResolverKey"
+        ],
+        "params": [
+          {
+            "name": "L",
+            "type": 16
+          },
+          {
+            "name": "R",
+            "type": 17
+          }
+        ],
+        "def": {
+          "composite": {}
+        }
+      }
+    },
+    {
+      "id": 16,
+      "type": {
+        "path": [
+          "ink_storage_traits",
+          "impls",
+          "AutoKey"
+        ],
+        "def": {
+          "composite": {}
+        }
+      }
+    },
+    {
+      "id": 17,
+      "type": {
+        "path": [
+          "ink_storage_traits",
+          "impls",
+          "ManualKey"
+        ],
+        "params": [
+          {
+            "name": "ParentKey",
+            "type": 18
+          }
+        ],
+        "def": {
+          "composite": {}
+        }
+      }
+    },
+    {
+      "id": 18,
+      "type": {
+        "def": {
+          "tuple": []
+        }
+      }
+    },
+    {
+      "id": 19,
+      "type": {
+        "def": {
+          "sequence": {
+            "type": 8
+          }
+        }
+      }
+    },
+    {
+      "id": 20,
+      "type": {
+        "def": {
+          "sequence": {
+            "type": 21
+          }
+        }
+      }
+    },
+    {
+      "id": 21,
+      "type": {
+        "def": {
+          "tuple": [
+            1,
+            22
+          ]
+        }
+      }
+    },
+    {
+      "id": 22,
+      "type": {
+        "path": [
+          "superdao_traits",
+          "Vote"
+        ],
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "name": "Aye",
+                "index": 0
+              },
+              {
+                "name": "Nay",
+                "index": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 23,
+      "type": {
+        "path": [
+          "ink_storage",
+          "lazy",
+          "mapping",
+          "Mapping"
+        ],
+        "params": [
+          {
+            "name": "K",
+            "type": 8
+          },
+          {
+            "name": "V",
+            "type": 20
+          },
+          {
+            "name": "KeyType",
+            "type": 24
+          }
+        ],
+        "def": {
+          "composite": {}
+        }
+      }
+    },
+    {
+      "id": 24,
+      "type": {
+        "path": [
+          "ink_storage_traits",
+          "impls",
+          "ResolverKey"
+        ],
+        "params": [
+          {
+            "name": "L",
+            "type": 16
+          },
+          {
+            "name": "R",
+            "type": 25
+          }
+        ],
+        "def": {
+          "composite": {}
+        }
+      }
+    },
+    {
+      "id": 25,
+      "type": {
+        "path": [
+          "ink_storage_traits",
+          "impls",
+          "ManualKey"
+        ],
+        "params": [
+          {
+            "name": "ParentKey",
+            "type": 18
+          }
+        ],
+        "def": {
+          "composite": {}
+        }
+      }
+    },
+    {
+      "id": 26,
+      "type": {
+        "path": [
+          "superdao",
+          "superdao",
+          "Superdao"
+        ],
+        "def": {
+          "composite": {
+            "fields": [
+              {
+                "name": "members",
+                "type": 0,
+                "typeName": "<Vec<AccountId> as::ink::storage::traits::AutoStorableHint<::\nink::storage::traits::ManualKey<993654908u32, ()>,>>::Type"
+              },
+              {
+                "name": "proposals",
+                "type": 9,
+                "typeName": "<Mapping<u32, Proposal> as::ink::storage::traits::AutoStorableHint\n<::ink::storage::traits::ManualKey<2638482248u32, ()>,>>::Type"
+              },
+              {
+                "name": "active_proposals",
+                "type": 19,
+                "typeName": "<Vec<u32> as::ink::storage::traits::AutoStorableHint<::ink::\nstorage::traits::ManualKey<3776920355u32, ()>,>>::Type"
+              },
+              {
+                "name": "votes",
+                "type": 23,
+                "typeName": "<Mapping<u32, Vec<(AccountId, Vote)>> as::ink::storage::traits::\nAutoStorableHint<::ink::storage::traits::ManualKey<2954409679u32,\n()>,>>::Type"
+              },
+              {
+                "name": "next_id",
+                "type": 8,
+                "typeName": "<u32 as::ink::storage::traits::AutoStorableHint<::ink::storage\n::traits::ManualKey<3176763391u32, ()>,>>::Type"
+              },
+              {
+                "name": "vote_threshold",
+                "type": 3,
+                "typeName": "<u8 as::ink::storage::traits::AutoStorableHint<::ink::storage::\ntraits::ManualKey<3281713526u32, ()>,>>::Type"
+              },
+              {
+                "name": "voting_period",
+                "type": 8,
+                "typeName": "<BlockNumber as::ink::storage::traits::AutoStorableHint<::ink::\nstorage::traits::ManualKey<3402490618u32, ()>,>>::Type"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 27,
+      "type": {
+        "path": [
+          "Result"
+        ],
+        "params": [
+          {
+            "name": "T",
+            "type": 18
+          },
+          {
+            "name": "E",
+            "type": 28
+          }
+        ],
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "name": "Ok",
+                "fields": [
+                  {
+                    "type": 18
+                  }
+                ],
+                "index": 0
+              },
+              {
+                "name": "Err",
+                "fields": [
+                  {
+                    "type": 28
+                  }
+                ],
+                "index": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 28,
+      "type": {
+        "path": [
+          "ink_primitives",
+          "LangError"
+        ],
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "name": "CouldNotReadInput",
+                "index": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 29,
+      "type": {
+        "path": [
+          "Result"
+        ],
+        "params": [
+          {
+            "name": "T",
+            "type": 30
+          },
+          {
+            "name": "E",
+            "type": 28
+          }
+        ],
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "name": "Ok",
+                "fields": [
+                  {
+                    "type": 30
+                  }
+                ],
+                "index": 0
+              },
+              {
+                "name": "Err",
+                "fields": [
+                  {
+                    "type": 28
+                  }
+                ],
+                "index": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 30,
+      "type": {
+        "path": [
+          "Result"
+        ],
+        "params": [
+          {
+            "name": "T",
+            "type": 7
+          },
+          {
+            "name": "E",
+            "type": 31
+          }
+        ],
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "name": "Ok",
+                "fields": [
+                  {
+                    "type": 7
+                  }
+                ],
+                "index": 0
+              },
+              {
+                "name": "Err",
+                "fields": [
+                  {
+                    "type": 31
+                  }
+                ],
+                "index": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 31,
+      "type": {
+        "path": [
+          "superdao_traits",
+          "Error"
+        ],
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "name": "DispatchFailed",
+                "index": 0
+              },
+              {
+                "name": "AlreadyMember",
+                "index": 1
+              },
+              {
+                "name": "NotMember",
+                "index": 2
+              },
+              {
+                "name": "ProposalNotFound",
+                "index": 3
+              },
+              {
+                "name": "ProposalIsNotApproved",
+                "index": 4
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 32,
+      "type": {
+        "path": [
+          "Result"
+        ],
+        "params": [
+          {
+            "name": "T",
+            "type": 33
+          },
+          {
+            "name": "E",
+            "type": 28
+          }
+        ],
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "name": "Ok",
+                "fields": [
+                  {
+                    "type": 33
+                  }
+                ],
+                "index": 0
+              },
+              {
+                "name": "Err",
+                "fields": [
+                  {
+                    "type": 28
+                  }
+                ],
+                "index": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 33,
+      "type": {
+        "path": [
+          "Result"
+        ],
+        "params": [
+          {
+            "name": "T",
+            "type": 18
+          },
+          {
+            "name": "E",
+            "type": 31
+          }
+        ],
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "name": "Ok",
+                "fields": [
+                  {
+                    "type": 18
+                  }
+                ],
+                "index": 0
+              },
+              {
+                "name": "Err",
+                "fields": [
+                  {
+                    "type": 31
+                  }
+                ],
+                "index": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 34,
+      "type": {
+        "path": [
+          "Result"
+        ],
+        "params": [
+          {
+            "name": "T",
+            "type": 35
+          },
+          {
+            "name": "E",
+            "type": 28
+          }
+        ],
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "name": "Ok",
+                "fields": [
+                  {
+                    "type": 35
+                  }
+                ],
+                "index": 0
+              },
+              {
+                "name": "Err",
+                "fields": [
+                  {
+                    "type": 28
+                  }
+                ],
+                "index": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 35,
+      "type": {
+        "path": [
+          "Result"
+        ],
+        "params": [
+          {
+            "name": "T",
+            "type": 8
+          },
+          {
+            "name": "E",
+            "type": 31
+          }
+        ],
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "name": "Ok",
+                "fields": [
+                  {
+                    "type": 8
+                  }
+                ],
+                "index": 0
+              },
+              {
+                "name": "Err",
+                "fields": [
+                  {
+                    "type": 31
+                  }
+                ],
+                "index": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 36,
+      "type": {
+        "path": [
+          "Result"
+        ],
+        "params": [
+          {
+            "name": "T",
+            "type": 0
+          },
+          {
+            "name": "E",
+            "type": 28
+          }
+        ],
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "name": "Ok",
+                "fields": [
+                  {
+                    "type": 0
+                  }
+                ],
+                "index": 0
+              },
+              {
+                "name": "Err",
+                "fields": [
+                  {
+                    "type": 28
+                  }
+                ],
+                "index": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 37,
+      "type": {
+        "path": [
+          "Result"
+        ],
+        "params": [
+          {
+            "name": "T",
+            "type": 7
+          },
+          {
+            "name": "E",
+            "type": 28
+          }
+        ],
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "name": "Ok",
+                "fields": [
+                  {
+                    "type": 7
+                  }
+                ],
+                "index": 0
+              },
+              {
+                "name": "Err",
+                "fields": [
+                  {
+                    "type": 28
+                  }
+                ],
+                "index": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 38,
+      "type": {
+        "path": [
+          "Result"
+        ],
+        "params": [
+          {
+            "name": "T",
+            "type": 39
+          },
+          {
+            "name": "E",
+            "type": 28
+          }
+        ],
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "name": "Ok",
+                "fields": [
+                  {
+                    "type": 39
+                  }
+                ],
+                "index": 0
+              },
+              {
+                "name": "Err",
+                "fields": [
+                  {
+                    "type": 28
+                  }
+                ],
+                "index": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 39,
+      "type": {
+        "path": [
+          "Option"
+        ],
+        "params": [
+          {
+            "name": "T",
+            "type": 10
+          }
+        ],
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "name": "None",
+                "index": 0
+              },
+              {
+                "name": "Some",
+                "fields": [
+                  {
+                    "type": 10
+                  }
+                ],
+                "index": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 40,
+      "type": {
+        "path": [
+          "Result"
+        ],
+        "params": [
+          {
+            "name": "T",
+            "type": 41
+          },
+          {
+            "name": "E",
+            "type": 28
+          }
+        ],
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "name": "Ok",
+                "fields": [
+                  {
+                    "type": 41
+                  }
+                ],
+                "index": 0
+              },
+              {
+                "name": "Err",
+                "fields": [
+                  {
+                    "type": 28
+                  }
+                ],
+                "index": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 41,
+      "type": {
+        "def": {
+          "sequence": {
+            "type": 42
+          }
+        }
+      }
+    },
+    {
+      "id": 42,
+      "type": {
+        "def": {
+          "tuple": [
+            8,
+            10
+          ]
+        }
+      }
+    },
+    {
+      "id": 43,
+      "type": {
+        "path": [
+          "Result"
+        ],
+        "params": [
+          {
+            "name": "T",
+            "type": 20
+          },
+          {
+            "name": "E",
+            "type": 28
+          }
+        ],
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "name": "Ok",
+                "fields": [
+                  {
+                    "type": 20
+                  }
+                ],
+                "index": 0
+              },
+              {
+                "name": "Err",
+                "fields": [
+                  {
+                    "type": 28
+                  }
+                ],
+                "index": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 44,
+      "type": {
+        "path": [
+          "Result"
+        ],
+        "params": [
+          {
+            "name": "T",
+            "type": 3
+          },
+          {
+            "name": "E",
+            "type": 28
+          }
+        ],
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "name": "Ok",
+                "fields": [
+                  {
+                    "type": 3
+                  }
+                ],
+                "index": 0
+              },
+              {
+                "name": "Err",
+                "fields": [
+                  {
+                    "type": 28
+                  }
+                ],
+                "index": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 45,
+      "type": {
+        "path": [
+          "Result"
+        ],
+        "params": [
+          {
+            "name": "T",
+            "type": 8
+          },
+          {
+            "name": "E",
+            "type": 28
+          }
+        ],
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "name": "Ok",
+                "fields": [
+                  {
+                    "type": 8
+                  }
+                ],
+                "index": 0
+              },
+              {
+                "name": "Err",
+                "fields": [
+                  {
+                    "type": 28
+                  }
+                ],
+                "index": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 46,
+      "type": {
+        "path": [
+          "Result"
+        ],
+        "params": [
+          {
+            "name": "T",
+            "type": 19
+          },
+          {
+            "name": "E",
+            "type": 28
+          }
+        ],
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "name": "Ok",
+                "fields": [
+                  {
+                    "type": 19
+                  }
+                ],
+                "index": 0
+              },
+              {
+                "name": "Err",
+                "fields": [
+                  {
+                    "type": 28
+                  }
+                ],
+                "index": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 47,
+      "type": {
+        "path": [
+          "ink_primitives",
+          "types",
+          "Hash"
+        ],
+        "def": {
+          "composite": {
+            "fields": [
+              {
+                "type": 2,
+                "typeName": "[u8; 32]"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 48,
+      "type": {
+        "path": [
+          "ink_env",
+          "types",
+          "NoChainExtension"
+        ],
+        "def": {
+          "variant": {}
+        }
+      }
+    }
+  ],
+  "storage": {
+    "root": {
+      "root_key": "0x00000000",
+      "layout": {
+        "struct": {
+          "name": "Superdao",
+          "fields": [
+            {
+              "name": "members",
+              "layout": {
+                "leaf": {
+                  "key": "0x00000000",
+                  "ty": 0
+                }
+              }
+            },
+            {
+              "name": "proposals",
+              "layout": {
+                "root": {
+                  "root_key": "0x480b449d",
+                  "layout": {
+                    "struct": {
+                      "name": "Proposal",
+                      "fields": [
+                        {
+                          "name": "call",
+                          "layout": {
+                            "enum": {
+                              "name": "Call",
+                              "dispatchKey": "0x480b449d",
+                              "variants": {
+                                "0": {
+                                  "name": "Contract",
+                                  "fields": [
+                                    {
+                                      "name": "0",
+                                      "layout": {
+                                        "struct": {
+                                          "name": "ContractCall",
+                                          "fields": [
+                                            {
+                                              "name": "callee",
+                                              "layout": {
+                                                "leaf": {
+                                                  "key": "0x480b449d",
+                                                  "ty": 1
+                                                }
+                                              }
+                                            },
+                                            {
+                                              "name": "selector",
+                                              "layout": {
+                                                "array": {
+                                                  "offset": "0x480b449d",
+                                                  "len": 4,
+                                                  "layout": {
+                                                    "leaf": {
+                                                      "key": "0x480b449d",
+                                                      "ty": 3
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            },
+                                            {
+                                              "name": "input",
+                                              "layout": {
+                                                "leaf": {
+                                                  "key": "0x480b449d",
+                                                  "ty": 4
+                                                }
+                                              }
+                                            },
+                                            {
+                                              "name": "transferred_value",
+                                              "layout": {
+                                                "leaf": {
+                                                  "key": "0x480b449d",
+                                                  "ty": 5
+                                                }
+                                              }
+                                            },
+                                            {
+                                              "name": "ref_time_limit",
+                                              "layout": {
+                                                "leaf": {
+                                                  "key": "0x480b449d",
+                                                  "ty": 6
+                                                }
+                                              }
+                                            },
+                                            {
+                                              "name": "allow_reentry",
+                                              "layout": {
+                                                "leaf": {
+                                                  "key": "0x480b449d",
+                                                  "ty": 7
+                                                }
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  ]
+                                },
+                                "1": {
+                                  "name": "Chain",
+                                  "fields": [
+                                    {
+                                      "name": "0",
+                                      "layout": {
+                                        "struct": {
+                                          "name": "ChainCall",
+                                          "fields": [
+                                            {
+                                              "name": "dest",
+                                              "layout": {
+                                                "leaf": {
+                                                  "key": "0x480b449d",
+                                                  "ty": 4
+                                                }
+                                              }
+                                            },
+                                            {
+                                              "name": "msg",
+                                              "layout": {
+                                                "leaf": {
+                                                  "key": "0x480b449d",
+                                                  "ty": 4
+                                                }
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "name": "voting_period_end",
+                          "layout": {
+                            "leaf": {
+                              "key": "0x480b449d",
+                              "ty": 8
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "ty": 9
+                }
+              }
+            },
+            {
+              "name": "active_proposals",
+              "layout": {
+                "leaf": {
+                  "key": "0x00000000",
+                  "ty": 19
+                }
+              }
+            },
+            {
+              "name": "votes",
+              "layout": {
+                "root": {
+                  "root_key": "0xcfb618b0",
+                  "layout": {
+                    "leaf": {
+                      "key": "0xcfb618b0",
+                      "ty": 20
+                    }
+                  },
+                  "ty": 23
+                }
+              }
+            },
+            {
+              "name": "next_id",
+              "layout": {
+                "leaf": {
+                  "key": "0x00000000",
+                  "ty": 8
+                }
+              }
+            },
+            {
+              "name": "vote_threshold",
+              "layout": {
+                "leaf": {
+                  "key": "0x00000000",
+                  "ty": 3
+                }
+              }
+            },
+            {
+              "name": "voting_period",
+              "layout": {
+                "leaf": {
+                  "key": "0x00000000",
+                  "ty": 8
+                }
+              }
+            }
+          ]
+        }
+      },
+      "ty": 26
+    }
+  },
+  "spec": {
+    "constructors": [
+      {
+        "label": "new",
+        "selector": "0x9bae9d5e",
+        "payable": true,
+        "args": [
+          {
+            "label": "vote_threshold",
+            "type": {
+              "type": 3,
+              "displayName": [
+                "u8"
+              ]
+            }
+          },
+          {
+            "label": "voting_period",
+            "type": {
+              "type": 8,
+              "displayName": [
+                "BlockNumber"
+              ]
+            }
+          }
+        ],
+        "returnType": {
+          "type": 27,
+          "displayName": [
+            "ink_primitives",
+            "ConstructorResult"
+          ]
+        },
+        "docs": [],
+        "default": false
+      },
+      {
+        "label": "default",
+        "selector": "0xed4b9d1b",
+        "payable": true,
+        "args": [],
+        "returnType": {
+          "type": 27,
+          "displayName": [
+            "ink_primitives",
+            "ConstructorResult"
+          ]
+        },
+        "docs": [],
+        "default": false
+      }
+    ],
+    "messages": [
+      {
+        "label": "resolve_proposal",
+        "selector": "0x78e3d8b2",
+        "mutates": true,
+        "payable": false,
+        "args": [
+          {
+            "label": "prop_id",
+            "type": {
+              "type": 8,
+              "displayName": [
+                "u32"
+              ]
+            }
+          }
+        ],
+        "returnType": {
+          "type": 29,
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ]
+        },
+        "docs": [],
+        "default": false
+      },
+      {
+        "label": "SuperDao::register_member",
+        "selector": "0x234726e7",
+        "mutates": true,
+        "payable": false,
+        "args": [],
+        "returnType": {
+          "type": 32,
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ]
+        },
+        "docs": [],
+        "default": false
+      },
+      {
+        "label": "SuperDao::deregister_member",
+        "selector": "0xba5e25a8",
+        "mutates": true,
+        "payable": false,
+        "args": [],
+        "returnType": {
+          "type": 27,
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ]
+        },
+        "docs": [],
+        "default": false
+      },
+      {
+        "label": "SuperDao::create_proposal",
+        "selector": "0x7c5f540f",
+        "mutates": true,
+        "payable": false,
+        "args": [
+          {
+            "label": "call",
+            "type": {
+              "type": 11,
+              "displayName": [
+                "Call"
+              ]
+            }
+          }
+        ],
+        "returnType": {
+          "type": 34,
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ]
+        },
+        "docs": [],
+        "default": false
+      },
+      {
+        "label": "SuperDao::vote",
+        "selector": "0x5002b426",
+        "mutates": true,
+        "payable": false,
+        "args": [
+          {
+            "label": "prop_id",
+            "type": {
+              "type": 8,
+              "displayName": [
+                "u32"
+              ]
+            }
+          },
+          {
+            "label": "vote",
+            "type": {
+              "type": 22,
+              "displayName": [
+                "Vote"
+              ]
+            }
+          }
+        ],
+        "returnType": {
+          "type": 32,
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ]
+        },
+        "docs": [],
+        "default": false
+      },
+      {
+        "label": "SuperDaoQuery::get_members",
+        "selector": "0x51565355",
+        "mutates": false,
+        "payable": false,
+        "args": [],
+        "returnType": {
+          "type": 36,
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ]
+        },
+        "docs": [],
+        "default": false
+      },
+      {
+        "label": "SuperDaoQuery::is_member",
+        "selector": "0x77f94f7a",
+        "mutates": false,
+        "payable": false,
+        "args": [],
+        "returnType": {
+          "type": 37,
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ]
+        },
+        "docs": [],
+        "default": false
+      },
+      {
+        "label": "SuperDaoQuery::get_proposal",
+        "selector": "0x1421bc5e",
+        "mutates": false,
+        "payable": false,
+        "args": [
+          {
+            "label": "index",
+            "type": {
+              "type": 8,
+              "displayName": [
+                "u32"
+              ]
+            }
+          }
+        ],
+        "returnType": {
+          "type": 38,
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ]
+        },
+        "docs": [],
+        "default": false
+      },
+      {
+        "label": "SuperDaoQuery::get_proposals",
+        "selector": "0x8e77186a",
+        "mutates": false,
+        "payable": false,
+        "args": [],
+        "returnType": {
+          "type": 40,
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ]
+        },
+        "docs": [],
+        "default": false
+      },
+      {
+        "label": "SuperDaoQuery::get_votes",
+        "selector": "0x19278efe",
+        "mutates": false,
+        "payable": false,
+        "args": [
+          {
+            "label": "proposal_id",
+            "type": {
+              "type": 8,
+              "displayName": [
+                "u32"
+              ]
+            }
+          }
+        ],
+        "returnType": {
+          "type": 43,
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ]
+        },
+        "docs": [],
+        "default": false
+      },
+      {
+        "label": "SuperDaoQuery::get_vote_threshold",
+        "selector": "0x9b365037",
+        "mutates": false,
+        "payable": false,
+        "args": [],
+        "returnType": {
+          "type": 44,
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ]
+        },
+        "docs": [],
+        "default": false
+      },
+      {
+        "label": "SuperDaoQuery::get_voting_period",
+        "selector": "0x2c14957d",
+        "mutates": false,
+        "payable": false,
+        "args": [],
+        "returnType": {
+          "type": 45,
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ]
+        },
+        "docs": [],
+        "default": false
+      },
+      {
+        "label": "SuperDaoQuery::get_active_proposals",
+        "selector": "0x867a6620",
+        "mutates": false,
+        "payable": false,
+        "args": [],
+        "returnType": {
+          "type": 46,
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ]
+        },
+        "docs": [],
+        "default": false
+      }
+    ],
+    "events": [],
+    "docs": [],
+    "lang_error": {
+      "type": 28,
+      "displayName": [
+        "ink",
+        "LangError"
+      ]
+    },
+    "environment": {
+      "accountId": {
+        "type": 1,
+        "displayName": [
+          "AccountId"
+        ]
+      },
+      "balance": {
+        "type": 5,
+        "displayName": [
+          "Balance"
+        ]
+      },
+      "hash": {
+        "type": 47,
+        "displayName": [
+          "Hash"
+        ]
+      },
+      "timestamp": {
+        "type": 6,
+        "displayName": [
+          "Timestamp"
+        ]
+      },
+      "blockNumber": {
+        "type": 8,
+        "displayName": [
+          "BlockNumber"
+        ]
+      },
+      "chainExtension": {
+        "type": 48,
+        "displayName": [
+          "ChainExtension"
+        ]
+      },
+      "maxEventTopics": 4,
+      "staticBufferSize": 16384
+    }
+  }
+}

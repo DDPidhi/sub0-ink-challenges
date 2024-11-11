@@ -1,0 +1,1229 @@
+{
+  "source": {
+    "hash": "0x8054ca80c242c96e2e646a6e591fb8414019bc0c4d2fe81cf0b2b6ecfb0356c5",
+    "language": "ink! 5.0.0",
+    "compiler": "rustc 1.82.0",
+    "build_info": {
+      "rust_toolchain": "stable-aarch64-apple-darwin",
+      "cargo_contract_version": "5.0.0-alpha",
+      "build_mode": "Debug",
+      "wasm_opt_settings": {
+        "optimization_passes": "Z",
+        "keep_debug_symbols": false
+      }
+    }
+  },
+  "contract": {
+    "name": "challenge-5-contract",
+    "version": "0.1.0",
+    "authors": [
+      "[your_name] <[your_email]>"
+    ]
+  },
+  "image": null,
+  "version": 5,
+  "types": [
+    {
+      "id": 0,
+      "type": {
+        "path": [
+          "ink_primitives",
+          "types",
+          "AccountId"
+        ],
+        "def": {
+          "composite": {
+            "fields": [
+              {
+                "type": 1,
+                "typeName": "[u8; 32]"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 1,
+      "type": {
+        "def": {
+          "array": {
+            "len": 32,
+            "type": 2
+          }
+        }
+      }
+    },
+    {
+      "id": 2,
+      "type": {
+        "def": {
+          "primitive": "u8"
+        }
+      }
+    },
+    {
+      "id": 3,
+      "type": {
+        "path": [
+          "ink_storage",
+          "lazy",
+          "vec",
+          "StorageVec"
+        ],
+        "params": [
+          {
+            "name": "V",
+            "type": 0
+          },
+          {
+            "name": "KeyType",
+            "type": 4
+          }
+        ],
+        "def": {
+          "composite": {
+            "fields": [
+              {
+                "name": "len",
+                "type": 8,
+                "typeName": "Lazy<u32, KeyType>"
+              },
+              {
+                "name": "elements",
+                "type": 10,
+                "typeName": "Mapping<u32, V, KeyType>"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 4,
+      "type": {
+        "path": [
+          "ink_storage_traits",
+          "impls",
+          "ResolverKey"
+        ],
+        "params": [
+          {
+            "name": "L",
+            "type": 5
+          },
+          {
+            "name": "R",
+            "type": 6
+          }
+        ],
+        "def": {
+          "composite": {}
+        }
+      }
+    },
+    {
+      "id": 5,
+      "type": {
+        "path": [
+          "ink_storage_traits",
+          "impls",
+          "AutoKey"
+        ],
+        "def": {
+          "composite": {}
+        }
+      }
+    },
+    {
+      "id": 6,
+      "type": {
+        "path": [
+          "ink_storage_traits",
+          "impls",
+          "ManualKey"
+        ],
+        "params": [
+          {
+            "name": "ParentKey",
+            "type": 7
+          }
+        ],
+        "def": {
+          "composite": {}
+        }
+      }
+    },
+    {
+      "id": 7,
+      "type": {
+        "def": {
+          "tuple": []
+        }
+      }
+    },
+    {
+      "id": 8,
+      "type": {
+        "path": [
+          "ink_storage",
+          "lazy",
+          "Lazy"
+        ],
+        "params": [
+          {
+            "name": "V",
+            "type": 9
+          },
+          {
+            "name": "KeyType",
+            "type": 4
+          }
+        ],
+        "def": {
+          "composite": {}
+        }
+      }
+    },
+    {
+      "id": 9,
+      "type": {
+        "def": {
+          "primitive": "u32"
+        }
+      }
+    },
+    {
+      "id": 10,
+      "type": {
+        "path": [
+          "ink_storage",
+          "lazy",
+          "mapping",
+          "Mapping"
+        ],
+        "params": [
+          {
+            "name": "K",
+            "type": 9
+          },
+          {
+            "name": "V",
+            "type": 0
+          },
+          {
+            "name": "KeyType",
+            "type": 4
+          }
+        ],
+        "def": {
+          "composite": {}
+        }
+      }
+    },
+    {
+      "id": 11,
+      "type": {
+        "def": {
+          "primitive": "str"
+        }
+      }
+    },
+    {
+      "id": 12,
+      "type": {
+        "path": [
+          "challenge_5_contract",
+          "dao",
+          "Dao"
+        ],
+        "def": {
+          "composite": {
+            "fields": [
+              {
+                "name": "superdao",
+                "type": 0,
+                "typeName": "<contract_ref!(SuperDao) as::ink::storage::traits::AutoStorableHint\n<::ink::storage::traits::ManualKey<1182843979u32, ()>,>>::Type"
+              },
+              {
+                "name": "voters",
+                "type": 3,
+                "typeName": "<StorageVec<AccountId> as::ink::storage::traits::AutoStorableHint\n<::ink::storage::traits::ManualKey<2091795962u32, ()>,>>::Type"
+              },
+              {
+                "name": "name",
+                "type": 11,
+                "typeName": "<String as::ink::storage::traits::AutoStorableHint<::ink::\nstorage::traits::ManualKey<1534630460u32, ()>,>>::Type"
+              },
+              {
+                "name": "value",
+                "type": 2,
+                "typeName": "<u8 as::ink::storage::traits::AutoStorableHint<::ink::storage::\ntraits::ManualKey<139771881u32, ()>,>>::Type"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 13,
+      "type": {
+        "path": [
+          "Result"
+        ],
+        "params": [
+          {
+            "name": "T",
+            "type": 7
+          },
+          {
+            "name": "E",
+            "type": 14
+          }
+        ],
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "name": "Ok",
+                "fields": [
+                  {
+                    "type": 7
+                  }
+                ],
+                "index": 0
+              },
+              {
+                "name": "Err",
+                "fields": [
+                  {
+                    "type": 14
+                  }
+                ],
+                "index": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 14,
+      "type": {
+        "path": [
+          "ink_primitives",
+          "LangError"
+        ],
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "name": "CouldNotReadInput",
+                "index": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 15,
+      "type": {
+        "path": [
+          "Result"
+        ],
+        "params": [
+          {
+            "name": "T",
+            "type": 11
+          },
+          {
+            "name": "E",
+            "type": 14
+          }
+        ],
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "name": "Ok",
+                "fields": [
+                  {
+                    "type": 11
+                  }
+                ],
+                "index": 0
+              },
+              {
+                "name": "Err",
+                "fields": [
+                  {
+                    "type": 14
+                  }
+                ],
+                "index": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 16,
+      "type": {
+        "path": [
+          "Result"
+        ],
+        "params": [
+          {
+            "name": "T",
+            "type": 17
+          },
+          {
+            "name": "E",
+            "type": 14
+          }
+        ],
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "name": "Ok",
+                "fields": [
+                  {
+                    "type": 17
+                  }
+                ],
+                "index": 0
+              },
+              {
+                "name": "Err",
+                "fields": [
+                  {
+                    "type": 14
+                  }
+                ],
+                "index": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 17,
+      "type": {
+        "path": [
+          "Result"
+        ],
+        "params": [
+          {
+            "name": "T",
+            "type": 7
+          },
+          {
+            "name": "E",
+            "type": 18
+          }
+        ],
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "name": "Ok",
+                "fields": [
+                  {
+                    "type": 7
+                  }
+                ],
+                "index": 0
+              },
+              {
+                "name": "Err",
+                "fields": [
+                  {
+                    "type": 18
+                  }
+                ],
+                "index": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 18,
+      "type": {
+        "path": [
+          "minidao_common",
+          "DaoError"
+        ],
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "name": "VoterAlreadyRegistered",
+                "index": 0
+              },
+              {
+                "name": "VoterNotRegistered",
+                "index": 1
+              },
+              {
+                "name": "VoterAlreadyVoted",
+                "index": 2
+              },
+              {
+                "name": "ProposalDoesNotExist",
+                "index": 3
+              },
+              {
+                "name": "PrevotePeriodIsNotEnded",
+                "index": 4
+              },
+              {
+                "name": "NoContractAddress",
+                "index": 5
+              },
+              {
+                "name": "SuperdaoError",
+                "fields": [
+                  {
+                    "type": 19,
+                    "typeName": "SuperdaoError"
+                  }
+                ],
+                "index": 6
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 19,
+      "type": {
+        "path": [
+          "superdao_traits",
+          "Error"
+        ],
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "name": "DispatchFailed",
+                "index": 0
+              },
+              {
+                "name": "AlreadyMember",
+                "index": 1
+              },
+              {
+                "name": "NotMember",
+                "index": 2
+              },
+              {
+                "name": "ProposalNotFound",
+                "index": 3
+              },
+              {
+                "name": "ProposalIsNotApproved",
+                "index": 4
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 20,
+      "type": {
+        "path": [
+          "Result"
+        ],
+        "params": [
+          {
+            "name": "T",
+            "type": 21
+          },
+          {
+            "name": "E",
+            "type": 14
+          }
+        ],
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "name": "Ok",
+                "fields": [
+                  {
+                    "type": 21
+                  }
+                ],
+                "index": 0
+              },
+              {
+                "name": "Err",
+                "fields": [
+                  {
+                    "type": 14
+                  }
+                ],
+                "index": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 21,
+      "type": {
+        "def": {
+          "primitive": "bool"
+        }
+      }
+    },
+    {
+      "id": 22,
+      "type": {
+        "def": {
+          "sequence": {
+            "type": 2
+          }
+        }
+      }
+    },
+    {
+      "id": 23,
+      "type": {
+        "def": {
+          "primitive": "u128"
+        }
+      }
+    },
+    {
+      "id": 24,
+      "type": {
+        "def": {
+          "primitive": "u64"
+        }
+      }
+    },
+    {
+      "id": 25,
+      "type": {
+        "path": [
+          "Result"
+        ],
+        "params": [
+          {
+            "name": "T",
+            "type": 26
+          },
+          {
+            "name": "E",
+            "type": 14
+          }
+        ],
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "name": "Ok",
+                "fields": [
+                  {
+                    "type": 26
+                  }
+                ],
+                "index": 0
+              },
+              {
+                "name": "Err",
+                "fields": [
+                  {
+                    "type": 14
+                  }
+                ],
+                "index": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 26,
+      "type": {
+        "path": [
+          "Result"
+        ],
+        "params": [
+          {
+            "name": "T",
+            "type": 27
+          },
+          {
+            "name": "E",
+            "type": 18
+          }
+        ],
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "name": "Ok",
+                "fields": [
+                  {
+                    "type": 27
+                  }
+                ],
+                "index": 0
+              },
+              {
+                "name": "Err",
+                "fields": [
+                  {
+                    "type": 18
+                  }
+                ],
+                "index": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 27,
+      "type": {
+        "path": [
+          "Result"
+        ],
+        "params": [
+          {
+            "name": "T",
+            "type": 9
+          },
+          {
+            "name": "E",
+            "type": 19
+          }
+        ],
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "name": "Ok",
+                "fields": [
+                  {
+                    "type": 9
+                  }
+                ],
+                "index": 0
+              },
+              {
+                "name": "Err",
+                "fields": [
+                  {
+                    "type": 19
+                  }
+                ],
+                "index": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 28,
+      "type": {
+        "path": [
+          "Result"
+        ],
+        "params": [
+          {
+            "name": "T",
+            "type": 2
+          },
+          {
+            "name": "E",
+            "type": 14
+          }
+        ],
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "name": "Ok",
+                "fields": [
+                  {
+                    "type": 2
+                  }
+                ],
+                "index": 0
+              },
+              {
+                "name": "Err",
+                "fields": [
+                  {
+                    "type": 14
+                  }
+                ],
+                "index": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 29,
+      "type": {
+        "path": [
+          "ink_primitives",
+          "types",
+          "Hash"
+        ],
+        "def": {
+          "composite": {
+            "fields": [
+              {
+                "type": 1,
+                "typeName": "[u8; 32]"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 30,
+      "type": {
+        "path": [
+          "ink_env",
+          "types",
+          "NoChainExtension"
+        ],
+        "def": {
+          "variant": {}
+        }
+      }
+    }
+  ],
+  "storage": {
+    "root": {
+      "root_key": "0x00000000",
+      "layout": {
+        "struct": {
+          "name": "Dao",
+          "fields": [
+            {
+              "name": "superdao",
+              "layout": {
+                "struct": {
+                  "name": "__ink_TraitCallBuilderSuperDao",
+                  "fields": [
+                    {
+                      "name": "account_id",
+                      "layout": {
+                        "leaf": {
+                          "key": "0x00000000",
+                          "ty": 0
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "voters",
+              "layout": {
+                "root": {
+                  "root_key": "0xfa45ae7c",
+                  "layout": {
+                    "leaf": {
+                      "key": "0xfa45ae7c",
+                      "ty": 0
+                    }
+                  },
+                  "ty": 3
+                }
+              }
+            },
+            {
+              "name": "name",
+              "layout": {
+                "leaf": {
+                  "key": "0x00000000",
+                  "ty": 11
+                }
+              }
+            },
+            {
+              "name": "value",
+              "layout": {
+                "leaf": {
+                  "key": "0x00000000",
+                  "ty": 2
+                }
+              }
+            }
+          ]
+        }
+      },
+      "ty": 12
+    }
+  },
+  "spec": {
+    "constructors": [
+      {
+        "label": "new",
+        "selector": "0x9bae9d5e",
+        "payable": false,
+        "args": [
+          {
+            "label": "name",
+            "type": {
+              "type": 11,
+              "displayName": [
+                "String"
+              ]
+            }
+          },
+          {
+            "label": "superdao",
+            "type": {
+              "type": 0,
+              "displayName": [
+                "AccountId"
+              ]
+            }
+          }
+        ],
+        "returnType": {
+          "type": 13,
+          "displayName": [
+            "ink_primitives",
+            "ConstructorResult"
+          ]
+        },
+        "docs": [],
+        "default": false
+      }
+    ],
+    "messages": [
+      {
+        "label": "get_name",
+        "selector": "0xa148a32a",
+        "mutates": false,
+        "payable": false,
+        "args": [],
+        "returnType": {
+          "type": 15,
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ]
+        },
+        "docs": [],
+        "default": false
+      },
+      {
+        "label": "register_voter",
+        "selector": "0x81b2cf8b",
+        "mutates": true,
+        "payable": false,
+        "args": [
+          {
+            "label": "voter",
+            "type": {
+              "type": 0,
+              "displayName": [
+                "AccountId"
+              ]
+            }
+          }
+        ],
+        "returnType": {
+          "type": 16,
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ]
+        },
+        "docs": [],
+        "default": false
+      },
+      {
+        "label": "deregister_voter",
+        "selector": "0xa4279724",
+        "mutates": true,
+        "payable": false,
+        "args": [
+          {
+            "label": "voter",
+            "type": {
+              "type": 0,
+              "displayName": [
+                "AccountId"
+              ]
+            }
+          }
+        ],
+        "returnType": {
+          "type": 16,
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ]
+        },
+        "docs": [],
+        "default": false
+      },
+      {
+        "label": "has_voter",
+        "selector": "0xf7156a78",
+        "mutates": false,
+        "payable": false,
+        "args": [
+          {
+            "label": "voter",
+            "type": {
+              "type": 0,
+              "displayName": [
+                "AccountId"
+              ]
+            }
+          }
+        ],
+        "returnType": {
+          "type": 20,
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ]
+        },
+        "docs": [],
+        "default": false
+      },
+      {
+        "label": "create_superdao_cross_chain_proposal",
+        "selector": "0x547cc8db",
+        "mutates": true,
+        "payable": false,
+        "args": [
+          {
+            "label": "voter",
+            "type": {
+              "type": 0,
+              "displayName": [
+                "AccountId"
+              ]
+            }
+          },
+          {
+            "label": "encoded_extrinsic",
+            "type": {
+              "type": 22,
+              "displayName": [
+                "Vec"
+              ]
+            }
+          },
+          {
+            "label": "fee_max",
+            "type": {
+              "type": 23,
+              "displayName": [
+                "Balance"
+              ]
+            }
+          },
+          {
+            "label": "ref_time",
+            "type": {
+              "type": 24,
+              "displayName": [
+                "u64"
+              ]
+            }
+          },
+          {
+            "label": "proof_size",
+            "type": {
+              "type": 24,
+              "displayName": [
+                "u64"
+              ]
+            }
+          }
+        ],
+        "returnType": {
+          "type": 25,
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ]
+        },
+        "docs": [],
+        "default": false
+      },
+      {
+        "label": "create_contract_call_proposal",
+        "selector": "0x0071768f",
+        "mutates": true,
+        "payable": false,
+        "args": [
+          {
+            "label": "voter",
+            "type": {
+              "type": 0,
+              "displayName": [
+                "AccountId"
+              ]
+            }
+          }
+        ],
+        "returnType": {
+          "type": 25,
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ]
+        },
+        "docs": [],
+        "default": false
+      },
+      {
+        "label": "update_value",
+        "selector": "0x9bcaeb73",
+        "mutates": true,
+        "payable": false,
+        "args": [],
+        "returnType": {
+          "type": 16,
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ]
+        },
+        "docs": [],
+        "default": false
+      },
+      {
+        "label": "get_value",
+        "selector": "0xca6f2170",
+        "mutates": true,
+        "payable": false,
+        "args": [],
+        "returnType": {
+          "type": 28,
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ]
+        },
+        "docs": [],
+        "default": false
+      },
+      {
+        "label": "vote_proposal",
+        "selector": "0x946595e4",
+        "mutates": true,
+        "payable": false,
+        "args": [
+          {
+            "label": "proposal_id",
+            "type": {
+              "type": 9,
+              "displayName": [
+                "u32"
+              ]
+            }
+          },
+          {
+            "label": "vote",
+            "type": {
+              "type": 21,
+              "displayName": [
+                "bool"
+              ]
+            }
+          },
+          {
+            "label": "voter",
+            "type": {
+              "type": 0,
+              "displayName": [
+                "AccountId"
+              ]
+            }
+          }
+        ],
+        "returnType": {
+          "type": 16,
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ]
+        },
+        "docs": [],
+        "default": false
+      }
+    ],
+    "events": [],
+    "docs": [],
+    "lang_error": {
+      "type": 14,
+      "displayName": [
+        "ink",
+        "LangError"
+      ]
+    },
+    "environment": {
+      "accountId": {
+        "type": 0,
+        "displayName": [
+          "AccountId"
+        ]
+      },
+      "balance": {
+        "type": 23,
+        "displayName": [
+          "Balance"
+        ]
+      },
+      "hash": {
+        "type": 29,
+        "displayName": [
+          "Hash"
+        ]
+      },
+      "timestamp": {
+        "type": 24,
+        "displayName": [
+          "Timestamp"
+        ]
+      },
+      "blockNumber": {
+        "type": 9,
+        "displayName": [
+          "BlockNumber"
+        ]
+      },
+      "chainExtension": {
+        "type": 30,
+        "displayName": [
+          "ChainExtension"
+        ]
+      },
+      "maxEventTopics": 4,
+      "staticBufferSize": 16384
+    }
+  }
+}
